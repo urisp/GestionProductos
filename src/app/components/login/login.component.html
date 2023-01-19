@@ -7,19 +7,28 @@
     <title>Login</title>
 </head>
 <body>
-    <form class="formulario">
-        <h1>INICIO DE SESION</h1>
-        <div class="contenedor">
-            <div class="input-contenedor">
-                <i class="fas fa-envelope icon"></i>
-                <input type="email" id="Email" placeholder="Nombre de usuario" required>             
-            </div>
-            <div class="input-contenedor">
-                <i class="fas fa-key icon"></i>
-                <input type="password" id="Contraseña"  placeholder="Contraseña" required>             
-            </div>
-            <input type="submit" id="botn"  value="Iniciar Sesion" class="button">
+<div class="section container">
+    <div class="row">
+        <div class="logo col s6">
+            <img class="responsive-img" src="http://forjasbogen.com/images/logo-blue.png" alt="">
         </div>
-    </form>
+        <form class="formulario col s6">
+            <div class="row card-panel">
+                <h4>Iniciar Sesión</h4>
+                <div class="input-field col s6">
+                    <input type="text" id="username" class="validate" required>
+                    <label for="username">Usuario</label>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="password" type="password" class="validate" required>
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <button class="btn" type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
