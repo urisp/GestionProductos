@@ -1,17 +1,8 @@
 .logo{
-    margin-top: 1px;
+    margin-top: 5px;
 }
 
-.iconuser{
-    background-color: blue;
-    text-align: center;
-    float: right;
-}
-
-.head{
-    background-color: mediumturquoise;
-}
-
-span{
-    color: black;
+.header{
+    margin-left: 10px;
+    margin-right: 10px;
 }
