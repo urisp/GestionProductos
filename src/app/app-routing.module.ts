@@ -8,7 +8,7 @@ import { JwtGuard } from './guard/jwt.guard';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent/*, canActivate: [jwtGuard]*/ },
-  { path: 'productos', component: ProductosComponent, canActivate: [JwtGuard] },
+  { path: 'productos', component: ProductosComponent/*, canActivate: [JwtGuard]*/ },
   { path: 'formulario', component: FormularioComponent/*, canActivate: [JwtGuard]*/ },
   { path: '**', redirectTo: '/login' }
 ];
@@ -18,3 +18,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+export const routingComponents = [LoginComponent, ProductosComponent, FormularioComponent]
