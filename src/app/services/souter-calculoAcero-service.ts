@@ -29,4 +29,8 @@ export class SouterCalculoAceroService {
     deleteCalculoAcero(id: number): Observable<any> {
         return this.http.delete(`${this.apiURl}/calculoAcero/${id}`);
     }
+    public get (url:string)
+    {
+        return this.http.get(url);
+    }
 }
