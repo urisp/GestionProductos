@@ -1,16 +1,53 @@
 <div class="row">
-    <div class="datos col s6">
+    <form novalidate [formGroup]="producto" class="datos col s6">
         <div class="input-field col s12">
-            <input id="fecha" type="text" class="validate">
+            <input formControlName="fecha" id="fecha" type="text" class="validate">
             <label for="fecha">Fecha</label>
+            <!-- <div
+                class="error"
+                style="color: red";
+                *ngIf="producto.get('fecha').touched">Favor de ingresar la fecha
+            </div> -->
         </div>
         <div class="input-field col s12">
-            <input id="producto" type="text" class="validate">
+            <input formControlName="productos" id="producto" type="text" class="validate">
             <label for="producto">Producto</label>
+            <!-- <div
+                class="error"
+                style="color: red";
+                *ngIf="producto.get('producto').touched">Favor de ingresar el nombre del producto
+            </div> -->
         </div>
         <div class="input-field col s12">
-            <input id="piezas" type="text" class="validate">
+            <input formControlName="piezas" id="piezas" type="text" class="validate">
             <label for="piezas">Piezas</label>
+            <!-- <div
+                class="error"
+                style="color: red";
+                *ngIf="producto.get('piezas').touched">Favor de ingresar la cantidad de pieza
+            </div> -->
+        </div>
+        <button class="btn" type="submit" [disabled]="producto.invalid">Imprimir</button>
+        <button class="btn" type="submit" (click)="resetForm()">Limpiar</button>
+    </form>
+    <div class="col s6">
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-content">
+                    <p><strong>Fecha:</strong><br><span class="id-field">{{producto.value.fecha | json}}</span></p>
+                    <p><strong>Producto:</strong><br><span class="id-field">{{producto.value.productos | json}}</span></p>
+                    <p><strong>Colada:</strong><br></p>
+                    <p><strong>Calidad:</strong><br></p>
+                    <p><strong>No.Barras:</strong><br></p>
+                    <p><strong>Piezas:</strong><br><span class="id-field">{{producto.value.piezas | json}}</span></p>
+                    <p><strong>Kgs. a cortar:</strong><br></p>
+                    <p><strong>Diametro:</strong><br></p>
+                    <p><strong>Largo de Barra:</strong><br></p>
+                    <p><strong>Longitud de tocho:</strong><br></p>
+                    <p><strong>Peso de tocho:</strong><br></p>
+                    <p><strong>Piezas por barra:</strong><br></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
