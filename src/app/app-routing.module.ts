@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { ProductosComponent } from './components/productos/productos.component';
-import { FormularioComponent } from './formulario/formulario.component';
+import { FormularioComponent } from './components/formulario/formulario.component';
 import { JwtGuard } from './guard/jwt.guard';
 
 const routes: Routes = [

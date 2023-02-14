@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators,AbstractControl, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { SouterCalculoAceroService } from '../services/souter-calculoAcero-service';
+import { SouterCalculoAceroService } from '../../services/souter-calculoAcero-service';
 
   @Component({
   selector: 'app-formulario',
