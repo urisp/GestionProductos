@@ -23,8 +23,9 @@
             <div class="card-stacked">
                 <div class="card-content">
                     <ng-container *ngIf="listaNoEstaVacia()">
+                        <ng-container *ngIf="listaproducto">
                             <p><strong>Fecha:</strong><span class="id-field">{{producto.value.fecha | json}}</span></p>
-                            <p><strong>Producto:</strong><span class="id-field">{{listaproductos[0].descripcion}}</span></p>  <!-- listaproductos[0].descripcion  para consumir la api o producto.value.productos | json para el formulario reactivo-->
+                            <p><strong>Producto:</strong><span class="id-field">{{listaproducto.calidadAcero}}</span></p>
                             <p><strong>Calidad:</strong><span class="id-field">{{listaproductos[0].calidadAcero}}</span></p>
                             <p><strong>Colada:</strong></p>                    
                             <p><strong>No.Barras:</strong><span class="id-field">{{listaproductos[0].noBarras}}</span><br></p>
@@ -36,6 +37,7 @@
                             <p><strong>Peso de tocho:</strong><span class="id-field">{{listaproductos[0].pesoTocho}}</span></p>
                             <p><strong>Piezas por barra:</strong><span class="id-field">{{listaproductos[0].piezasBarra}}</span></p>
                         </ng-container>
+                    </ng-container>
                     <ng-container *ngIf="!listaNoEstaVacia()">
                         <p>La lista está vacía.</p>
                     </ng-container>

@@ -11,6 +11,7 @@ import { SouterCalculoAceroService } from '../services/souter-calculoAcero-servi
 export class FormularioComponent implements OnInit {
   public producto!: FormGroup; // producto corresponde al nombre del formulario
   public listaproductos:any=[]; // listaproductos corresponde al nombre de la lista que se va a mostrar (maneja el json completo)
+  public listaproducto:any; // listaproducto corresponde al nombre del producto que se va a mostrar (id)
   public listaNoEstaVacia(): boolean { // listaNoEstaVacia corresponde al nombre de la funcion que se va a utilizar en el html para mostrar la lista
     return this.listaproductos.length > 0;
   }
@@ -34,8 +35,7 @@ export class FormularioComponent implements OnInit {
   {
     this.SouterCalculoAceroService.get(`http://www.souter.somee.com/api/calculoAcero`).subscribe(
       respuesta=>{
-        this.listaproductos=respuesta;
-        console.log(respuesta);
+        this.listaproductos=respuesta; // lista productos te trae el json completo
       }
     )
   }
@@ -43,5 +43,9 @@ export class FormularioComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.cargaData();
+    this.route.params.subscribe(params => {
+      const id = +params['id'];
+      this.listaproducto = this.listaproductos.find((p:any )=> p.id === id); // listaproducto te trae el producto que se selecciono
+    });
   }
 }
