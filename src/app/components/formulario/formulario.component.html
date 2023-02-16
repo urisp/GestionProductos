@@ -3,11 +3,15 @@
         <div class="input-field col s12">
             <input formControlName="fecha" id="fecha" type="text" class="validate">
             <label for="fecha">Fecha</label>
+            <!-- <input type="number" formControlName="numero1">
+            <label for="fecha">Número 1:</label> -->
         </div>
-        <div class="input-field col s12">
+        <!-- <div class="input-field col s12">
             <input formControlName="productos" id="producto" type="text" class="validate">
             <label for="producto">Producto</label>
-        </div>
+            <input type="number" formControlName="numero2">
+            <label for="producto">Números 2:</label>
+        </div> -->
         <div class="input-field col s12">
             <input formControlName="piezas" id="piezas" type="text" class="validate">
             <label for="piezas">Piezas</label>
@@ -18,6 +22,7 @@
         <button class="btn" type="submit" [disabled]="producto.invalid">Imprimir</button>
         <button class="btn" type="submit" (click)="resetForm()">Limpiar</button>
     </form>
+    <!-- <p>El resultado es: {{ resultado$ | async }}</p> -->
     <div class="col s6">
         <div class="card horizontal">
             <div class="card-stacked">
@@ -31,7 +36,7 @@
                             <p><strong>No.Barras:</strong><span class="id-field">{{listaproductos[0].noBarras}}</span><br></p>
                             <p><strong>Piezas:</strong><span class="id-field">{{producto.value.piezas | json}}</span></p>
                             <p><strong>Kgs. a cortar:</strong><span class="id-field">{{listaproductos[0].kgsMetro}}</span><br></p>
-                            <p><strong>Diametro:</strong></p>
+                            <p><strong>Diametro:</strong><span class="id-field">{{listaproductos[0].tipoAcero}}</span></p>
                             <p><strong>Largo de Barra:</strong><span class="id-field">{{listaproductos[0].longBarra}}</span></p>
                             <p><strong>Longitud de tocho:</strong><span class="id-field">{{listaproductos[0].longTocho}}</span></p>
                             <p><strong>Peso de tocho:</strong><span class="id-field">{{listaproductos[0].pesoTocho}}</span></p>
