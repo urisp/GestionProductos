@@ -1,4 +1,6 @@
 import { Component,OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SouterPermisos } from 'src/app/services/souter-autenticacion-service';
 
 @Component({
   selector: 'app-productos',
@@ -7,7 +9,12 @@ import { Component,OnInit } from '@angular/core';
 })
 export class ProductosComponent implements OnInit {
   public objetoUnico:any={};
-  constructor () { }
+  constructor (private aut:SouterPermisos,private router:Router) { }
+
+  public cerrarSesion(){
+    this.aut.limpiarToken();
+    this.router.navigateByUrl("/login");
+  }
 
   ngOnInit():void{
     let token=sessionStorage.getItem("token") as string;

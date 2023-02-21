@@ -2,8 +2,12 @@
         <div class="logo col s2">
             <img class="responsive-img" src="http://forjasbogen.com/images/logo-blue.png" alt="">
         </div>
-        <div class="usuario col s10">
+        <div class="usuario col s8">
             <!-- <a>Bienvenido: {{objetoUnico.given_name}}</a> -->
+            <a (click)="cerrarSesion()" class="exit waves-effect waves-light btn">Cerrar Sesión</a>
+        </div>
+        <div class="usuario col s2">
+            <!-- <a>{{objetoUnico.given_name}}</a> -->
             <img class="avatar" [src]="objetoUnico.picture" alt="" srcset="">
         </div>
     </div>
