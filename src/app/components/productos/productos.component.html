@@ -11,6 +11,17 @@
             <img class="avatar" [src]="objetoUnico.picture" alt="" srcset="">
         </div>
     </div>
-<!-- Card de los productos     -->
-    <div class="row" id="container">        
+<!-- Card de los productos -->
+<div class="row">
+    <div class="card col s12 m4" *ngFor="let card of cards">
+        <div class="card-image">
+            {{card.descripcion}}
+        </div>
+        <div class="card-content">                
+            {{card.codigo}}
+        </div>
+        <div class="card-action">
+            <a [routerLink]="['/formulario/', card.id]">Realizar reporte</a>
+        </div>
     </div>
+</div>

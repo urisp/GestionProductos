@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'productos', component: ProductosComponent,canActivate:[SouterPermisosService] },
-  { path: 'formulario', component: FormularioComponent, canActivate: [SouterPermisosService] },
+  { path: 'formulario/:id', component: FormularioComponent, canActivate: [SouterPermisosService] },
   { path: '**', redirectTo: '/login' }
 ];
 

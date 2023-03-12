@@ -22,7 +22,6 @@
         <button class="btn" type="submit" [disabled]="producto.invalid">Imprimir</button>
         <button class="btn" type="submit" (click)="resetForm()">Limpiar</button>
     </form>
-    <!-- <p>El resultado es: {{ resultado$ | async }}</p> -->
     <div class="col s6">
         <div class="card horizontal">
             <div class="card-stacked">
@@ -32,15 +31,16 @@
                             <p><strong>Fecha:</strong><span class="id-field">{{producto.value.fecha | json}}</span></p>
                             <p><strong>Producto:</strong><span class="id-field">{{listaproductos[0].descripcion}}</span></p> <!-- consultamos un producto en especifico por id pero le mandamos el id -->
                             <p><strong>Calidad:</strong><span class="id-field">{{listaproductos[0].calidadAcero}}</span></p><!-- consultamos una producto en especifico por id pero manualmente -->
-                            <p><strong>Colada:</strong></p>                    
-                            <p><strong>No.Barras:</strong><span class="id-field">{{listaproductos[0].noBarras}}</span><br></p>
+                            <p><strong>Colada:</strong></p>
+                            <p><strong>No.Barras:12</strong><span class="id-field">{{listaproductos[0].noBarras}}</span><br></p>
                             <p><strong>Piezas:</strong><span class="id-field">{{producto.value.piezas | json}}</span></p>
                             <p><strong>Kgs. a cortar:</strong><span class="id-field">{{listaproductos[0].kgsMetro}}</span><br></p>
                             <p><strong>Diametro:</strong><span class="id-field">{{listaproductos[0].tipoAcero}}</span></p>
                             <p><strong>Largo de Barra:</strong><span class="id-field">{{listaproductos[0].longBarra}}</span></p>
                             <p><strong>Longitud de tocho:</strong><span class="id-field">{{listaproductos[0].longTocho}}</span></p>
                             <p><strong>Peso de tocho:</strong><span class="id-field">{{listaproductos[0].pesoTocho}}</span></p>
-                            <p><strong>Piezas por barra:</strong><span class="id-field">{{listaproductos[0].piezasBarra}}</span></p>
+                            <p><strong>Piezas por barra:</strong>{{ resultado$ | async }}</p>
+                            <!-- <p>El resultado es: {{ resultado$ | async }}</p> -->
                         </ng-container>
                     </ng-container>
                     <ng-container *ngIf="!listaNoEstaVacia()">
