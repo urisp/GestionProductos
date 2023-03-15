@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SouterCalculoAceroService } from '../../services/souter-calculoAcero-service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map,switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-formulario',
@@ -12,8 +12,12 @@ import { map } from 'rxjs/operators';
 })
 
 export class FormularioComponent implements OnInit {
+  campos: any;
   public producto!: FormGroup; // producto corresponde al nombre del formulario
-  resultado$!: Observable<number>; // resultado$ corresponde al resultado de dicha operacion al calcular el acero
+  resultadoNoBarra$!: Observable<number>;
+  resultadoNoBarra!: Observable<number>;
+  resultadoKilogramos$!: Observable<number>;
+  resultadoPiezasBarra$!: Observable<number>;
   public listaproductos:any=[]; // listaproductos corresponde al nombre de la lista que se va a mostrar (maneja el json completo)
   public listaproducto:any; // listaproducto corresponde al nombre del producto que se va a mostrar (id)
   public listaNoEstaVacia(): boolean { // listaNoEstaVacia corresponde al nombre de la funcion que se va a utilizar en el html para mostrar la lista
@@ -23,12 +27,15 @@ export class FormularioComponent implements OnInit {
   
   createForm(){
     this.producto = this.formulario.group({
-      fecha: [new Date().toLocaleDateString(),Validators.required], // fecha corresponde al campo fecha que es lo que va a ingresar el usuario
-      piezas: ["",Validators.required], // piezas corresponde al campo piezas que es lo que va a ingresar el usuario
-      resultado: ''
+      fecha: [new Date().toLocaleDateString(),Validators.required],
+      piezas: ["",Validators.required],
+      resultadoNoBarra: '',
+      resultadoKilogramos: '',
+      resultadoPiezasBarra: '',
     });
-    this.resultado$ = this.producto.valueChanges
-    .pipe(map(({ piezas }) => piezas / 12));
+    this.resultadoNoBarra$ = this.producto.valueChanges.pipe(map(({ piezas }) => piezas / this.campos.longBarra));
+    this.resultadoPiezasBarra$ = this.producto.valueChanges.pipe(map(({ piezas }) => piezas / 384));
+    this.resultadoKilogramos$ = this.producto.valueChanges.pipe(map(({ piezas }) => piezas / this.campos.pesoTocho));
   }
 
   resetForm(): void {
@@ -50,8 +57,10 @@ export class FormularioComponent implements OnInit {
     this.createForm();
     this.cargaData();
     this.route.params.subscribe(params => {
-      const id = +params['id'];
-      this.listaproducto = this.listaproductos.find((p:any )=> p.id === id); // listaproducto te trae el producto que se selecciono
+      const id= params['id'];
+      this.SouterCalculoAceroService.getCalculoAcero(id).subscribe(data=>{
+        this.campos=data;
+      });
     });
   }
 }

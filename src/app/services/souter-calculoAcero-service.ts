@@ -14,8 +14,9 @@ export class SouterCalculoAceroService {
         return this.http.get(`${this.apiURl}/calculoAcero`);
     }
     // Obtiene los productos de calculo de acero por su id
-    getCalculoAcero(id: number): Observable<any> {
-        return this.http.get(`${this.apiURl}/calculoAcero/${id}`);
+    getCalculoAcero(id:number): Observable<any>{
+        const url = `${this.apiURl}/calculoAcero/${id}`;
+        return this.http.get(url);
     }
     // Crea un calculo de acero
     createCalculoAcero(data: any): Observable<any> {
