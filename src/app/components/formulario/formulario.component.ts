@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SouterCalculoAceroService } from '../../services/souter-calculoAcero-service';
-import { Observable } from 'rxjs';
-import { map,switchMap } from 'rxjs/operators';
+import { observable, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import pdfMake  from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-formulario',
@@ -13,6 +16,9 @@ import { map,switchMap } from 'rxjs/operators';
 
 export class FormularioComponent implements OnInit {
   campos: any;
+  valorNoBarras: number;
+  valorPiezasBarra: number;
+  valorKilogramos: number;
   public producto!: FormGroup; // producto corresponde al nombre del formulario
   resultadoNoBarra$!: Observable<number>;
   resultadoNoBarra!: Observable<number>;
@@ -34,8 +40,11 @@ export class FormularioComponent implements OnInit {
       resultadoPiezasBarra: '',
     });
     this.resultadoNoBarra$ = this.producto.valueChanges.pipe(map(({ piezas }) => piezas / this.campos.longBarra));
+    this.resultadoNoBarra$.subscribe(valorNoBarras => this.valorNoBarras = valorNoBarras);
     this.resultadoPiezasBarra$ = this.producto.valueChanges.pipe(map(({ piezas }) => piezas / 384));
+    this.resultadoPiezasBarra$.subscribe(valorPiezasBarra => this.valorPiezasBarra = valorPiezasBarra);
     this.resultadoKilogramos$ = this.producto.valueChanges.pipe(map(({ piezas }) => piezas / this.campos.pesoTocho));
+    this.resultadoKilogramos$.subscribe(valorKilogramos => this.valorKilogramos = valorKilogramos);
   }
 
   resetForm(): void {
@@ -63,4 +72,30 @@ export class FormularioComponent implements OnInit {
       });
     });
   }
+  createPdf(){
+    const pdfDefinition:any={
+      content:[
+        {
+          table: {
+            body: [
+              ['Campos', 'Datos'],
+              ['Fecha', this.producto.value.fecha],
+              ['Producto a cortar',this.campos.descripcion],
+              ['Calidad',this.campos.calidadAcero],
+              ['No.Barras',this.valorNoBarras],
+              ['Piezas a cortar',this.producto.value.piezas],
+              ['Kilogramos a cortar',this.valorKilogramos],
+              ['Diametro',this.campos.tipoAcero],
+              ['Largo de barra',this.campos.longBarra],
+              ['Longitud de tocho',this.campos.longTocho],
+              ['Peso de tocho',this.campos.pesoTocho],
+              ['Piezas por barra',this.valorPiezasBarra],
+            ]
+          }
+        }
+      ]
+    }
+    const pdf= pdfMake.createPdf(pdfDefinition);
+    pdf.open();
+	}
 }

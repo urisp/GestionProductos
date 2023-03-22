@@ -8,7 +8,7 @@
             <input formControlName="piezas" id="piezas" type="text" class="validate">
             <label for="piezas">Piezas</label>
         </div>
-        <button class="btn" type="submit" [disabled]="producto.invalid">Imprimir</button>
+        <button class="btn" type="submit" (click)="createPdf()" [disabled]="producto.invalid">Imprimir</button>
         <button class="btn" type="submit" (click)="resetForm()">Limpiar</button>
     </form>
     <div class="col s6">
