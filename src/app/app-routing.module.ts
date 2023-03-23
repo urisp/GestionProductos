@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { ProductosComponent } from './components/productos/productos.component';
-import { FormularioComponent } from './formulario/formulario.component';
-import { JwtGuard } from './guard/jwt.guard';
+import { FormularioComponent } from './components/formulario/formulario.component';
+import { SouterPermisosService } from './services/souter-permisos-service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent/*, canActivate: [jwtGuard]*/ },
-  { path: 'productos', component: ProductosComponent, canActivate: [JwtGuard] },
-  { path: 'formulario', component: FormularioComponent/*, canActivate: [JwtGuard]*/ },
+  { path: 'login', component: LoginComponent },
+  { path: 'productos', component: ProductosComponent,canActivate:[SouterPermisosService] },
+  { path: 'formulario/:id', component: FormularioComponent, canActivate: [SouterPermisosService] },
   { path: '**', redirectTo: '/login' }
 ];
 
@@ -18,3 +18,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+export const routingComponents = [LoginComponent, ProductosComponent, FormularioComponent]

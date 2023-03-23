@@ -1,0 +1,35 @@
+<div class="row">
+    <form novalidate [formGroup]="producto" class="datos col s6">
+        <div class="input-field col s12">
+            <input formControlName="fecha" id="fecha" type="text" class="validate">
+            <label for="fecha">Fecha</label>
+        </div>
+        <div class="input-field col s12">
+            <input formControlName="piezas" id="piezas" type="text" class="validate">
+            <label for="piezas">Piezas</label>
+        </div>
+        <button class="btn" type="submit" (click)="createPdf()" [disabled]="producto.invalid">Imprimir</button>
+        <button class="btn" type="submit" (click)="resetForm()">Limpiar</button>
+    </form>
+    <div class="col s6">
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-content">
+                    <div>
+                        <p>Fecha:{{producto.value.fecha | json}}</p>
+                        <p>Descripcion: {{campos.descripcion}}</p>
+                        <p>Calidad: {{campos.calidadAcero}}</p>
+                        <p>No.Barras:{{resultadoNoBarra$ | async}}</p>
+                        <p>Piezas a cortar:{{producto.value.piezas | json}}</p>
+                        <p>Kgs a cortar:{{resultadoKilogramos$ | async}} KGS</p>
+                        <p>Diametro: {{campos.tipoAcero}}</p>
+                        <p>Largo de barra: {{campos.longBarra}}</p>
+                        <p>Longitud de tocho: {{campos.longTocho}}</p>
+                        <p>Peso tocho: {{campos.pesoTocho}}</p>
+                        <p>Piezas por barra: {{resultadoPiezasBarra$ | async}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

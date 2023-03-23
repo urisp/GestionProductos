@@ -1,20 +1,22 @@
+<router-outlet></router-outlet>
 <div class="section container">
     <div class="row">
         <div class="logo col s12 m6">
             <img class="responsive-img" src="http://forjasbogen.com/images/logo-blue.png" alt="">
         </div>
-        <form class="formulario col s12 m6">
+        <form [formGroup]="loginForm" (ngsubmit)="onSubmit()" class="formulario col s12 m6">
             <div class="row card-panel">
                 <h4>Iniciar Sesión</h4>
                 <div class="input-field col s6">
-                    <input type="text" id="username" class="validate" required>
+                    <input formControlName="usuario" type="text" id="username" class="validate" required>
                     <label for="username">Usuario</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="password" type="password" class="validate" required>
+                    <input formControlName="password" type="password" class="validate" required>
                     <label for="password">Password</label>
                 </div>
-                <button class="btn" type="submit">Entrar</button>
+                <button class="btn" type="submit" (click)="onSubmit()">Entrar</button> <br> <br>
+                <div id="buttonDiv"></div>
             </div>
         </form>
     </div>
