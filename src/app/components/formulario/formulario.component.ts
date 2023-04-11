@@ -35,19 +35,16 @@ export class FormularioComponent implements OnInit {
     this.producto = this.formulario.group({
       fecha: [new Date().toLocaleDateString(),Validators.required],
       piezas: ["",Validators.required],
-      largoBarra: ["",Validators.required],
-      longitudTocho: ["",Validators.required],
-      pesoTocho: ["",Validators.required],
       resultadoNoBarra: '',
       resultadoKilogramos: '',
       resultadoPiezasBarra: '',
     });
-    this.resultadoNoBarra$ = this.producto.valueChanges.pipe(map(({ piezas }) => Math.floor(( piezas / this.valorPiezasBarra))));
-    this.resultadoPiezasBarra$ = this.producto.valueChanges.pipe(map(({ largoBarra,longitudTocho }) => Math.floor((largoBarra / longitudTocho * 10))));
-    this.resultadoKilogramos$ = this.producto.valueChanges.pipe(map(({ piezas,pesoTocho }) => Math.floor(( piezas * pesoTocho/1000))));
-    this.resultadoKilogramos$.subscribe(valorKilogramos => this.valorKilogramos = valorKilogramos);
+    this.resultadoPiezasBarra$ = this.producto.valueChanges.pipe(map(({}) => Math.floor(( this.campos.longBarra / this.campos.longTocho * 100))));
+    this.resultadoNoBarra$ = this.producto.valueChanges.pipe(map(({ piezas }) => Math.ceil(( piezas / this.campos.piezasBarra)))); // this.valorPiezasBarra
+    this.resultadoKilogramos$ = this.producto.valueChanges.pipe(map(({}) => Math.ceil((this.valorNoBarras * this.campos.pesoTramo))));
     this.resultadoPiezasBarra$.subscribe(valorPiezasBarra => this.valorPiezasBarra = valorPiezasBarra);
     this.resultadoNoBarra$.subscribe(valorNoBarras => this.valorNoBarras = valorNoBarras);
+    this.resultadoKilogramos$.subscribe(valorKilogramos => this.valorKilogramos = valorKilogramos);
   }
 
   resetForm(): void {
@@ -58,7 +55,7 @@ export class FormularioComponent implements OnInit {
   // Con este metodo podemos obtener los valores de la API
   public cargaData()
   {
-    this.SouterCalculoAceroService.get(`http://www.souter.somee.com/api/calculoAcero`).subscribe(
+    this.SouterCalculoAceroService.get(`https://www.souter.somee.com/api/calculoAcero`).subscribe(
       respuesta=>{
         this.listaproductos=respuesta; // lista productos te trae el json completo
       }
@@ -90,16 +87,17 @@ export class FormularioComponent implements OnInit {
             body: [
               [{text: 'Fecha', style: 'tableHeader',alignment: 'center'},{text: this.producto.value.fecha, style: 'tableHeader', alignment: 'center',colSpan: 2},{}],
               [{text: 'Producto a cortar', style: 'tableHeader',alignment: 'center'},{text: this.campos.descripcion, style: 'tableHeader', alignment: 'center',colSpan: 2},{}],
+              [{text: 'Colada', style: 'tableHeader',alignment: 'center'},{text: this.campos.colada, style: 'tableHeader', alignment: 'center',colSpan: 2},{}],  
               [{text: '', style: 'tableHeader', alignment: 'center'}, {text: 'Teorico', style: 'tableHeader', alignment: 'center'}, {text: 'Practico', style: 'tableHeader', alignment: 'center'}],
               [{text: 'Calidad', style: 'tableHeader',alignment: 'center'},{text: this.campos.calidadAcero, style: 'tableHeader', alignment: 'center',colSpan: 2},{}],
               [{text: 'No.barras', style: 'tableHeader',alignment: 'center'},{text: this.valorNoBarras, style: 'tableHeader', alignment: 'center',colSpan: 2},{}],
               [{text: 'Piezas a cortar', style: 'tableHeader',alignment: 'center'},{text: this.producto.value.piezas, style: 'tableHeader', alignment: 'center',colSpan: 2},{}],
-              [{text: 'Kilogramos a cortar', style: 'tableHeader',alignment: 'center'},{text: this.valorKilogramos + ' kg', style: 'tableHeader', alignment: 'center',colSpan: 2},{}],
+              [{text: 'Kilogramos a cortar', style: 'tableHeader',alignment: 'center'},{text: this.valorKilogramos + ' kgs', style: 'tableHeader', alignment: 'center',colSpan: 2},{}],
               [{text: 'Diametro', style: 'tableHeader', alignment: 'center'}, {text: this.campos.tipoAcero, style: 'tableHeader', alignment: 'center'}, {text: '', style: 'tableHeader', alignment: 'center'}],
-              [{text: 'Largo de barra', style: 'tableHeader', alignment: 'center'}, {text: this.producto.value.largoBarra +' mm', style: 'tableHeader', alignment: 'center'}, {text: '', style: 'tableHeader', alignment: 'center'}],
-              [{text: 'Longitud de tocho', style: 'tableHeader', alignment: 'center'}, {text: this.producto.value.longitudTocho+' mm', style: 'tableHeader', alignment: 'center'}, {text: '', style: 'tableHeader', alignment: 'center'}],
-              [{text: 'Peso de tocho', style: 'tableHeader', alignment: 'center'}, {text: this.campos.pesoTocho + ' mm', style: 'tableHeader', alignment: 'center'}, {text: '', style: 'tableHeader', alignment: 'center'}],
-              [{text: 'Piezas por barra', style: 'tableHeader', alignment: 'center'}, {text: this.valorPiezasBarra, style: 'tableHeader', alignment: 'center'}, {text: '', style: 'tableHeader', alignment: 'center'}],
+              [{text: 'Largo de barra', style: 'tableHeader', alignment: 'center'}, {text: this.campos.longBarra + ' mts', style: 'tableHeader', alignment: 'center'}, {text: '', style: 'tableHeader', alignment: 'center'}],
+              [{text: 'Longitud de tocho', style: 'tableHeader', alignment: 'center'}, {text: this.campos.longTocho +' cm', style: 'tableHeader', alignment: 'center'}, {text: '', style: 'tableHeader', alignment: 'center'}],
+              [{text: 'Peso de tocho', style: 'tableHeader', alignment: 'center'}, {text: this.campos.pesoTocho + ' kgs', style: 'tableHeader', alignment: 'center'}, {text: '', style: 'tableHeader', alignment: 'center'}],
+              [{text: 'Piezas por barra', style: 'tableHeader', alignment: 'center'}, {text: this.campos.piezasBarra, style: 'tableHeader', alignment: 'center'}, {text: '', style: 'tableHeader', alignment: 'center'}],
               [{text: 'Almacen', style: 'tableHeader', alignment: 'center'}, {text: 'Operador', style: 'tableHeader', alignment: 'center'}, {text: 'Aseguramiento Calidad', style: 'tableHeader', alignment: 'center'}],
               [{text: '                     ', style: 'tableHeader', alignment: 'center'}, {text: '                     ', style: 'tableHeader', alignment: 'center'}, {text: '                     ', style: 'tableHeader', alignment: 'center'}],					  
             ]
