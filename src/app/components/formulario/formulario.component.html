@@ -8,18 +8,6 @@
             <input formControlName="piezas" id="piezas" type="text" class="validate">
             <label for="piezas">Piezas</label>
         </div>
-        <div class="input-field col s12">
-            <input formControlName="largoBarra" id="largoBarra" type="text" class="validate">
-            <label for="largoBarra">Largo de barra</label>
-        </div>
-        <div class="input-field col s12">
-            <input formControlName="longitudTocho" id="longitudTocho" type="text" class="validate">
-            <label for="longitudTocho">Longitud de tocho</label>
-        </div>
-        <div class="input-field col s12">
-            <input formControlName="pesoTocho" id="pesoTocho" type="text" class="validate">
-            <label for="pesoTocho">Peso del tocho</label>
-        </div>
         <button class="btn" type="submit" (click)="createPdf()" [disabled]="producto.invalid">Imprimir</button>
         <button class="btn" type="submit" (click)="resetForm()">Limpiar</button>
     </form>
@@ -30,15 +18,16 @@
                     <div>
                         <p>Fecha:{{producto.value.fecha | json}}</p>
                         <p>Descripcion: {{campos.descripcion}}</p>
+                        <p>Colada: {{campos.colada}}</p>
                         <p>Calidad: {{campos.calidadAcero}}</p>
                         <p>No.Barras:{{resultadoNoBarra$ | async}}</p>
                         <p>Piezas a cortar:{{producto.value.piezas | json}}</p>
                         <p>Kgs a cortar:{{resultadoKilogramos$ | async}} Kgs</p>
                         <p>Diametro: {{campos.tipoAcero}}</p>
-                        <p>Largo de barra: {{producto.value.largoBarra}} mm</p>
-                        <p>Longitud de tocho: {{producto.value.longitudTocho}} mm</p>
-                        <p>Peso tocho: {{campos.pesoTocho}} mm</p>
-                        <p>Piezas por barra: {{resultadoPiezasBarra$ | async}}</p>
+                        <p>Largo de barra: {{campos.longBarra}} mts</p>
+                        <p>Longitud de tocho: {{campos.longTocho}} cm</p>
+                        <p>Peso tocho: {{campos.pesoTocho}} kgs</p>
+                        <p>Piezas por barra: {{campos.piezasBarra}}</p> <!-- resultadoPiezasBarra$ | async -->
                     </div>
                 </div>
             </div>

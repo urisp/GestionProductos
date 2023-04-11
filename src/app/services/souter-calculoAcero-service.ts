@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 })
 
 export class SouterCalculoAceroService {
-    apiURl = 'http://www.souter.somee.com/api';
+    apiURl = 'https://www.souter.somee.com/api';
     constructor(private http: HttpClient) { }
     // Obtiene todos los productos de calculos de acero
     getCalculoAceros(): Observable<any> {

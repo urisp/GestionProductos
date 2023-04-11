@@ -9,7 +9,7 @@ import { ResponseModel } from '../interfaces/response-model';
 })
 
 export class SouterUsuarioService {
-    apiURl = 'http://www.souter.somee.com/api';
+    apiURl = 'https://www.souter.somee.com/api';
     constructor(private http: HttpClient) { }
     // Obtiene todos los usuarios
     getUsuarios(): Observable<any> {

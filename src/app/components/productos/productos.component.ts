@@ -19,7 +19,7 @@ export class ProductosComponent implements OnInit {
   }
 
   ngOnInit():void{
-    this.http.get<any[]>('http://www.souter.somee.com/api/calculoAcero').subscribe(cards => {
+    this.http.get<any[]>('https://www.souter.somee.com/api/calculoAcero').subscribe(cards => {
       this.cards = cards;
     });
     let token=sessionStorage.getItem("token") as string;
